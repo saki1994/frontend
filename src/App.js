@@ -1,6 +1,7 @@
 import TodaysInput from "./components/TodaysInput"
-import NewInput from "./components/NewInput"; 
+import NewInput from "./components/NewInput";  
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import DailyTest from "./components/DailyTest";
 
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
         <Switch>
           <Route exact path="/">
               <TodaysInput />
-              <NewInput />
+              <NewInput />  
+              <DailyTest />
           </Route>
         </Switch>
       </Router>

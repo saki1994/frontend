@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-globals */ 
 
-const Button = ({deleteFunc, item, text}) => {
+const Button = ({btnClickEvent, item, text}) => {
 
     const handleClick = () => {
-        deleteFunc(item) 
+        btnClickEvent(item)
     }
     return <button onClick={handleClick}>{text}</button>
 }

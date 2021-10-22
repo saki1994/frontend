@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import UpdateItem from "./UpdateItem";
-import {today, yesterday} from "./date.js"
+import { today } from "./date.js";
+import getAllData from "./axiosGetData";
 
 const TodaysInput = () => {
   const [data, setData] = useState();
@@ -12,24 +13,9 @@ const TodaysInput = () => {
 
   //get all data from the server
   useEffect(() => {
-    axios
-      .get("https://sakirumatsu.herokuapp.com/")
-      .then((res) => setData(res.data));
-
+    getAllData(setData);
     setAllList([]);
-
-    
   }, []);
-
-  //event btn for yesterday input
-  const yesterdayInputBtn = () => {
-    const currentDate = yesterday;
-    const todayInputList = data.filter(
-      (item) => item.dateAdded === currentDate
-    );
-    setAllList(todayInputList);
-     
-  };
 
   //event btn for input saved at the current date
   const todayInputBtn = () => {
@@ -38,7 +24,6 @@ const TodaysInput = () => {
       (item) => item.dateAdded === currentDate
     );
     setAllList(todayInputList);
- 
   };
 
   //Delete an item from the server
@@ -59,12 +44,11 @@ const TodaysInput = () => {
   //save the edited item
   const closeEditBox = () => {
     setIsEditing(false);
-  }
+  };
 
   return (
     <>
-      <button onClick={yesterdayInputBtn}>Click for Yesterday's input</button>
-      <button onClick={todayInputBtn}>Click for Yesterday's input</button>
+      <button onClick={todayInputBtn}>Click for Today's input</button>
       <table>
         <thead>
           <tr>
@@ -81,24 +65,24 @@ const TodaysInput = () => {
                 <td>{item.polish}</td>
                 <td>{item.english}</td>
                 <td>
-                  <Button text="Delete" deleteFunc={deleteItem} item={item} />
+                  <Button  text="Delete" btnClickEvent={deleteItem} item={item} />
                 </td>
                 <td>
-                  <Button text="Edit" deleteFunc={editItem} item={item} />
+                  <Button  text="Edit" btnClickEvent={editItem} item={item} />
                 </td>
               </tr>
             );
           })}
         </thead>
       </table>
-      {
-        isEditing && (
+      {isEditing && (
         <div>
-        <UpdateItem item={updateItem}/>
-        <button type="submit" onClick={closeEditBox}>Close edit</button>
-      </div>
-        )
-      } 
+          <UpdateItem item={updateItem} />
+          <button type="submit" onClick={closeEditBox}>
+            Close edit
+          </button>
+        </div>
+      )}
     </>
   );
 };
