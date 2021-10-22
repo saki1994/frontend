@@ -1,4 +1,3 @@
-import TodaysInput from "./components/TodaysInput"
 import NewInput from "./components/NewInput";  
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import DailyTest from "./components/DailyTest";
@@ -9,8 +8,7 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route exact path="/">
-              <TodaysInput />
+          <Route exact path="/"> 
               <NewInput />  
               <DailyTest />
           </Route>

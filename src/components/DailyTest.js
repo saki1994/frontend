@@ -1,11 +1,14 @@
+/* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
 import { yesterday } from "./date.js";
 import getAllData from "./axiosGetData.js";
 import Button from "./Button.js";
 import axios from "axios";
+import { wordStatus } from "./variables/formData.js";
 
-const DailyTest = () => {
+const DailyTest = () => { 
   const [data, setData] = useState();
+  const [showData, setShowData] = useState(false);
   const [allList, setAllList] = useState([]);
   const [isTestGoing, setIsTestGoing] = useState(false);
   const [reviewAnswer, setReviewAnswer] = useState(false);
@@ -15,11 +18,7 @@ const DailyTest = () => {
     polish: "",
   });
   const [itemStatus, setItemStatus] = useState({
-    wordStatus: {
-      hasTested: false,
-      repeated: false,
-      timesRepeated: 0,
-    },
+    wordStatus: wordStatus,
   });
 
   useEffect(() => {
@@ -27,10 +26,10 @@ const DailyTest = () => {
     setAllList([]);
   }, []);
   //event btn for yesterday input
-  const yesterdayInputBtn = () => {
-    const currentDate = yesterday;
+  const dailyTest = () => { 
+    showData ? setShowData(false) : setShowData(true);
     const todayInputList = data.filter(
-      (item) => item.dateAdded === currentDate
+      (item) => !item.wordStatus.memorize  
     );
     setAllList(todayInputList);
   };
@@ -42,15 +41,16 @@ const DailyTest = () => {
       return {
         ...previous,
         _id: item._id,
-        english: item.english
+        english: item.english,
       };
     });
 
+    const { memorize, repeated, timesRepeated } = item.wordStatus;
     setItemStatus({
       wordStatus: {
-        hasTested: item.wordStatus.hasTested,
-        repeated: item.wordStatus.requested,
-        timesRepeated: item.wordStatus.timesRepeated,
+        memorize: memorize,
+        repeated: repeated,
+        timesRepeated: timesRepeated,
       },
     });
   };
@@ -74,28 +74,29 @@ const DailyTest = () => {
     const [polishWord] = allList.filter((item) => testInput._id === item._id);
     const lowerCasePolish = polishWord.polish.toLowerCase();
 
+    const { timesRepeated } = polishWord.wordStatus;
+
     if (lowerCasePolish === testInput.polish) {
       setItemStatus((previous) => {
         return {
-          wordStatus: { 
-            hasTested: true,
-            repeated: previous.wordStatus.repeated,
-            timesRepeated: previous.wordStatus.timesRepeated,
+          wordStatus: {
+            ...previous.wordStatus,
+            memorize: true,
           },
         };
-      }); 
+      });
     } else {
       setItemStatus((previous) => {
         return {
           wordStatus: {
-            hasTested: true,
+            memorize: false,
             repeated: true,
-            timesRepeated: previous.wordStatus.timesRepeated + 1,
+            timesRepeated: timesRepeated + 1,
           },
         };
       });
-    } 
-  }; 
+    }
+  };
 
   const submitAnswer = () => {
     setReviewAnswer(false);
@@ -111,18 +112,22 @@ const DailyTest = () => {
     } else {
       console.log("wrong");
     } 
-  }
+  };
+ 
 
   return (
     <div>
-      <button onClick={yesterdayInputBtn}>Click for Yesterday's input</button>
-      <table>
+      <button onClick={dailyTest}>Daily Test</button>
+      {
+        showData && (
+          <table>
         <thead>
           <tr>
             <th>#</th>
             <th>English</th>
             <th>Polish</th>
-            <th>Repeated times</th>
+            <th>Start test</th>
+            <th>Submit</th> 
           </tr>
         </thead>
         <thead>
@@ -134,47 +139,45 @@ const DailyTest = () => {
                   <td>{index + 1}</td>
                   <td>{item.english}</td>
                   <td>
+                    <input
+                      onChange={handleChange}
+                      type="text"
+                      placeholder="click edit to start -->"
+                      name="polish" 
+                    />
+                  </td>
+                  <td>
                     <Button
                       btnClickEvent={startTest}
-                      text="Start test"
+                      text="edit"
                       item={item}
                     />
                   </td>
-                  <td>{item.wordStatus.timesRepeated}</td>
+                  <td><button onClick={checkAnswer}>Review</button></td> 
                 </tr>
               )
             );
           })}
         </thead>
-      </table>
-      {isTestGoing && (
-        <>
-          <input
-            onChange={handleChange}
-            type="text"
-            placeholder="Enter Polish"
-            name="polish"
-            value={testInput.polish}
-          />
-          <button onClick={checkAnswer}>Review</button>
-        </>
-      )}
+      </table> 
+        )
+      }
       {reviewAnswer && (
         <>
-        <p>Please review your answer</p>
-        <table>
-          <thead>
-            <tr>
-              <th>English</th>
-              <th>Polish</th>
-            </tr>
-            <tr>
-              <th>{testInput.english}</th>
-              <th>{testInput.polish}</th>
-            </tr>
-          </thead>
-        </table>
-        <button onClick={submitAnswer}>Look's good!</button>
+          <p>Please review your answer</p>
+          <table>
+            <thead>
+              <tr>
+                <th>English</th>
+                <th>Polish</th>
+              </tr>
+              <tr>
+                <th>{testInput.english}</th>
+                <th>{testInput.polish}</th>
+              </tr>
+            </thead>
+          </table>
+          <button onClick={submitAnswer}>Look's good!</button>
         </>
       )}
     </div>
