@@ -1,3 +1,5 @@
+ 
+
 const formData = {
     polish: "",
     english: "",
@@ -8,7 +10,7 @@ const formData = {
     }
 }
 
-const { english, wordStatus} = formData
+const { polish, english, wordStatus} = formData
 
 export default formData;
-export { english, wordStatus }
+export { polish, english, wordStatus }

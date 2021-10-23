@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import formData from "./variables/formData";
+import formData  from "./variables/formData";
 import { today } from "./date.js";
 import TableLayout from "./TableLayout";
 import getAllData from "./axiosGetData";
+//import allData from "./axiosRequest/toMemorize.js"
+ 
 
 const NewInput = () => {
   const [getData, setGetData] = useState();
   const [newInput, setNewInput] = useState(formData);
   const [showForm, setShowForm] = useState(false);
   const [allList, setAllList] = useState([]);
+  const [tempInput, setTempInput] = useState([]);
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -25,7 +28,7 @@ const NewInput = () => {
 
   //get all data from the server
   useEffect(() => {
-    getAllData(setGetData);
+    getAllData(setGetData);  
   }, []);
 
   const submitInput = (e) => {
@@ -46,7 +49,11 @@ const NewInput = () => {
         polish: "",
       };
     });
-
+    
+    setTempInput(lists => {
+      return [...lists, newInput]  
+    })
+ 
     e.preventDefault();
   };
 
@@ -56,15 +63,14 @@ const NewInput = () => {
     const currentInput = getData.filter(
       (item) => item.dateAdded === currentDate
     );
-    setAllList(currentInput);
-    console.log(currentInput);
+    setAllList(currentInput); 
   };
   return (
     <>
       <button onClick={showFormEvent}>Show Form</button>
       {showForm && (
         <> {
-          allList.length > 10 ? (
+          allList.length <= 10 ? (
             <form action="#">
             <textarea
               onChange={handleChange}
@@ -89,7 +95,7 @@ const NewInput = () => {
           Please start with the previous cards.</p>)
         }
           
-          <TableLayout lists={allList} />
+          <TableLayout lists={allList} tempInput={tempInput}/>
         </>
       )}
     </>
