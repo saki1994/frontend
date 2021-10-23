@@ -1,6 +1,6 @@
-import NewInput from "./components/NewInput";  
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import DailyTest from "./components/DailyTest";
+import DailyTest from "./components/DailyTest"; 
+import Home from "./components/Home"
 
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/"> 
-              <NewInput />  
+          <Home /> 
               <DailyTest />
           </Route>
         </Switch>

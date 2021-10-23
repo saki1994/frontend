@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
 import { yesterday } from "./date.js";
-import getAllData from "./axiosGetData.js";
+import getAllData from "./axios/axiosGetData.js";
 import Button from "./Button.js";
 import axios from "axios";
 import { wordStatus } from "./variables/formData.js";
