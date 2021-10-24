@@ -1,65 +1,51 @@
 import React, { useState } from "react";
-import axios from "axios";
+import formData from "./variables/formData";
+import sendNewCard from "./axios/axiosSendData"; 
 
-const NewInput = () => { 
-  const [newInput, setNewInput] = useState({
-    polish: "",
-    english: "",
-    wordStatus: {
-      hasTested: false,
-      repeated: false,
-      timesRepeated: 0,
-    }
-  });
-   
+const Form = ({ dataLength }) => {
+  const [newInput, setNewInput] = useState(formData); 
+
+  //handle and save changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setNewInput((previous) => {
       return {
         ...previous,
         [name]: value,
       };
     });
-    
     e.preventDefault();
   };
 
+  //Send new card input
   const submitInput = (e) => {
-    const {polish, english, wordStatus} = newInput;
+    sendNewCard(newInput); 
+    e.preventDefault();
+  }
 
-    if (polish && english && wordStatus) {
-        axios.post("https://sakirumatsu.herokuapp.com/", newInput)
-        .then(res => console.log(res))
-
-    } else {
-        console.log('wrong')
-    }
-
-    e.preventDefault()
-  };
-  return (
-    <form action="#">
-      <textarea
+  return dataLength <= 10 ? (
+    <form>
+      <input
         onChange={handleChange}
         type="text"
         name="polish"
         value={newInput.polish}
         placeholder="Enter Polish word"
       />
-      <textarea
+      <input
         onChange={handleChange}
         type="text"
         name="english"
         value={newInput.english}
         placeholder="Enter English word"
       />
-
       <button type="submit" onClick={submitInput}>
-        Submit
-      </button>
+              Submit
+            </button> 
     </form>
-  );
+  ) : (
+    <p>You have entered 10 cards today.</p>
+  ); 
 };
 
-export default NewInput;
+export default Form;
