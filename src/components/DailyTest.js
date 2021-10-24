@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
-import { yesterday } from "./date.js";
+import { today, yesterday } from "./date.js";
 import getAllData from "./axios/axiosGetData.js";
 import Button from "./Button.js";
 import axios from "axios";
@@ -29,7 +29,7 @@ const DailyTest = () => {
   const dailyTest = () => { 
     showData ? setShowData(false) : setShowData(true);
     const todayInputList = data.filter(
-      (item) => !item.wordStatus.memorize  
+      (item) => !item.wordStatus.memorize && item.dateAdded !== today
     );
     setAllList(todayInputList);
   };
@@ -172,8 +172,8 @@ const DailyTest = () => {
                 <th>Polish</th>
               </tr>
               <tr>
-                <th>{testInput.english}</th>
-                <th>{testInput.polish}</th>
+                <td>{testInput.english}</td>
+                <td>{testInput.polish}</td>
               </tr>
             </thead>
           </table>

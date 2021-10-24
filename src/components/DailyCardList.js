@@ -1,11 +1,13 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import Button from "./Button";
 import UpdateItem from "./UpdateItem";
 import deleteData from "./axios/axiosDeleteData";
+import {today} from "./date";
 
 const DailyCardList = ({ todayCards }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updateItem, setUpdateItem] = useState(); 
+  const [todayList, setTodayList] = useState([]);
   //Delete data from database
   const deleteItem = (item) => {
     deleteData(item);
@@ -22,9 +24,16 @@ const DailyCardList = ({ todayCards }) => {
     window.location.reload(false);
   };
 
+  useEffect(() => {
+    const todayInputList = todayCards.filter(
+      (item) => item.dateAdded === today
+    );
+    setTodayList(todayInputList);
+  }, [todayCards])
+
   return (
     <div>
-      <p>You have {todayCards.length} cards added.</p>
+      <p>You have {todayList.length} cards added.</p>
       <table>
         <thead>
           <tr>
@@ -32,7 +41,7 @@ const DailyCardList = ({ todayCards }) => {
             <th>English</th>
             <th>Polish</th>
           </tr>
-          {todayCards.map((item, index) => {
+          {todayList.map((item, index) => {
             return (
               <tr key={item._id}>
                 <td>{index + 1}</td>
