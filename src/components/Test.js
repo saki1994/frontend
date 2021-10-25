@@ -28,6 +28,7 @@ const Test = ({ allCards }) => {
         return {
           ...card,
           wordStatus: { 
+            needMemorizing: false,
             memorize: false,
             repeated: repeated,
             timesRepeated: timesRepeated
@@ -40,6 +41,7 @@ const Test = ({ allCards }) => {
           ...card,
           wordStatus: { 
             ...wordStatus,
+            needMemorizing: true,
             repeated: true,
             timesRepeated: timesRepeated + 1
           }

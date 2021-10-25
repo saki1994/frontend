@@ -8,7 +8,7 @@ const MemorizeBox = ({ allCards }) => {
 
   useEffect(() => {
     const todayInputList = allCards.filter(
-      (item) => item.wordStatus.memorize 
+      (item) => item.wordStatus.needMemorizing 
     );
     setMemorizeCards(todayInputList);
   }, [allCards]);
@@ -23,7 +23,7 @@ const MemorizeBox = ({ allCards }) => {
         ...lists,
         wordStatus: {
           ...lists.wordStatus,
-          memorize: false,
+          needMemorizing: false,
         },
       };
     });
