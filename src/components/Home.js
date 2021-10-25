@@ -10,6 +10,7 @@ const Home = () => {
   const [showDiv, setShowDiv] = useState(false);
   const [memorizeDiv, setMemorizeDiv] = useState(false);
   const [testDiv, setTestDiv] = useState(false);
+  const [allTrueCard, setAllTrueCard] = useState();
 
   useEffect(() => {
     getAllData(setGetData);
@@ -28,7 +29,10 @@ const Home = () => {
   }
 
   const openTest = () => {
-    setTestDiv(true)
+    setTestDiv(true);
+    
+    const getAllTrue = getData.filter(card => card.wordStatus.memorize);
+    setAllTrueCard(getAllTrue);
   }
   return (
     <>
@@ -49,7 +53,7 @@ const Home = () => {
       </div>
       <div style={{border: "1px solid red"}}>
         <button onClick={openTest}>Start Test</button>
-        {testDiv  && <Test allCards={getData}/>}
+        {testDiv  && <Test allCards={allTrueCard}/>}
       </div>
     </>
   );

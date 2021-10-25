@@ -1,29 +1,59 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import TableHeading from "./TableHeading";
 import TableList from "./TableList";
 import Button from "./Button";
 import TestBox from "./TestBox";
+import updateData from "./axios/axiosUpdateData";
+import { useEffect } from "react/cjs/react.development";
+import { wordStatus } from "./variables/formData";
 
 const Test = ({ allCards }) => {
-    const [doTest, setDoTest] = useState(false);
-    const [cardTest, setCardTest] = useState({});
+  const [doTest, setDoTest] = useState(false);
+  const [cardTest, setCardTest] = useState({});
+  const [testResult, setTestResult] = useState(false); 
 
   const startTest = (item) => {
     setDoTest(true);
     setCardTest(item);
   };
 
-  const getAnswer = (item, answer) =>{
-      const polish = item.polish.toLowerCase();
-      const testAnswer = answer.toLowerCase();
-      
-      if (polish === testAnswer) {
-        console.log("correct")
-      } else {
-        console.log('wrong')
-      }
-  }
-    
+  const getAnswer = (item, answer) => {
+    setTestResult(true);
+    const polish = item.polish.toLowerCase();
+    const testAnswer = answer.toLowerCase();  
+
+    const {repeated, timesRepeated} = item.wordStatus;
+    if (polish === testAnswer) {
+      setCardTest(card => {
+        return {
+          ...card,
+          wordStatus: { 
+            memorize: false,
+            repeated: repeated,
+            timesRepeated: timesRepeated
+          }
+        }
+      })
+    } else {
+      setCardTest(card => {
+        return {
+          ...card,
+          wordStatus: { 
+            ...wordStatus,
+            repeated: true,
+            timesRepeated: timesRepeated + 1
+          }
+        }
+      })
+    } 
+    setDoTest(false);
+  };
+
+  useEffect(() => {
+    testResult && updateData(cardTest); 
+  })
+ 
+
   return (
     <div>
       <table>
@@ -41,18 +71,16 @@ const Test = ({ allCards }) => {
                     <Button
                       btnClickEvent={startTest}
                       item={card}
-                      text="Start Test"
-                    /> 
+                      text="Ready?"
+                    />,
                   ]}
-                /> 
+                />
               </tr>
             );
           })}
         </thead>
       </table>
-    {
-        doTest && <TestBox allCards={cardTest} getAnswer={getAnswer}/>
-    }
+      {doTest && <TestBox allCards={cardTest} getAnswer={getAnswer} />}
     </div>
   );
 };

@@ -22,3 +22,6 @@
 * english text show
 * input to right polish
 * button to save the edit and send upadted data
+
+
+4. Add remember to scheme

@@ -1,33 +1,37 @@
 import React, { useEffect, useState } from "react";
-import Button from "./Button"; 
-import updateData from "./axios/axiosUpdateData";
+import Button from "./Button";
+import updateData from "./axios/axiosUpdateData"; 
 
 const MemorizeBox = ({ allCards }) => {
   const [memorizeCards, setMemorizeCards] = useState([]);
   const [changeStatus, setChangeStatus] = useState();
 
   useEffect(() => {
-    const todayInputList = allCards.filter((item) => item.wordStatus.memorize);
+    const todayInputList = allCards.filter(
+      (item) => item.wordStatus.memorize 
+    );
     setMemorizeCards(todayInputList);
   }, [allCards]);
 
   const memorizeBtn = (card) => {
-    const [momorizeCard] = memorizeCards.filter(item => item._id === card._id);
+    const [momorizeCard] = memorizeCards.filter(
+      (item) => item._id === card._id
+    );
     setChangeStatus(momorizeCard);
-    setChangeStatus(lists => {
-        return {
-            ...lists,
-            wordStatus: {
-                ...lists.wordStatus,
-                memorize: false
-            }
-        }
-    }) 
-  }; 
+    setChangeStatus((lists) => {
+      return {
+        ...lists,
+        wordStatus: {
+          ...lists.wordStatus,
+          memorize: false,
+        },
+      };
+    });
+  };
 
   const send = () => {
-    updateData(changeStatus)
-  }
+    updateData(changeStatus);
+  };
 
   return (
     <div>

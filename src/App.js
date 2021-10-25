@@ -1,5 +1,4 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import DailyTest from "./components/DailyTest"; 
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'; 
 import Home from "./components/Home"
 
 
@@ -9,8 +8,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/"> 
-          <Home /> 
-              <DailyTest />
+          <Home />  
           </Route>
         </Switch>
       </Router>

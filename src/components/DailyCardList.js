@@ -1,12 +1,14 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import UpdateItem from "./UpdateItem";
 import deleteData from "./axios/axiosDeleteData";
-import {today} from "./date";
+import { today } from "./date";
+import TableHeading from "./TableHeading";
+import TableList from "./TableList";
 
 const DailyCardList = ({ todayCards }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [updateItem, setUpdateItem] = useState(); 
+  const [updateItem, setUpdateItem] = useState();
   const [todayList, setTodayList] = useState([]);
   //Delete data from database
   const deleteItem = (item) => {
@@ -29,7 +31,7 @@ const DailyCardList = ({ todayCards }) => {
       (item) => item.dateAdded === today
     );
     setTodayList(todayInputList);
-  }, [todayCards])
+  }, [todayCards]);
 
   return (
     <div>
@@ -37,26 +39,26 @@ const DailyCardList = ({ todayCards }) => {
       <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>English</th>
-            <th>Polish</th>
+            <TableHeading
+              items={["#", "English", "Polish", "Edit", "Delete"]}
+            />
           </tr>
           {todayList.map((item, index) => {
             return (
               <tr key={item._id}>
-                <td>{index + 1}</td>
-                <td>{item.english}</td>
-                <td>{item.polish}</td>
-                <td>
-                  <Button
-                    text="Delete"
-                    btnClickEvent={deleteItem}
-                    item={item}
-                  />
-                </td>
-                <td>
-                  <Button text="Edit" btnClickEvent={editItem} item={item} />
-                </td>
+                <TableList
+                  items={[
+                    index + 1,
+                    item.english,
+                    item.polish,
+                    <Button text="Edit" btnClickEvent={editItem} item={item} />,
+                    <Button
+                      text="Delete"
+                      btnClickEvent={deleteItem}
+                      item={item}
+                    />,
+                  ]}
+                />
               </tr>
             );
           })}
