@@ -10,7 +10,13 @@ import { wordStatus } from "./variables/formData";
 const Test = ({ allCards }) => {
   const [doTest, setDoTest] = useState(false);
   const [cardTest, setCardTest] = useState({});
-  const [testResult, setTestResult] = useState(false); 
+  const [testResult, setTestResult] = useState(false);
+  const [testList, setTestList] = useState([]);
+
+  useEffect(() => {
+    const testCards = allCards.filter((card) => card.wordStatus.needMemorizing);
+    setTestList(testCards);
+  }, [allCards]);
 
   const startTest = (item) => {
     setDoTest(true);
@@ -20,41 +26,40 @@ const Test = ({ allCards }) => {
   const getAnswer = (item, answer) => {
     setTestResult(true);
     const polish = item.polish.toLowerCase();
-    const testAnswer = answer.toLowerCase();  
+    const testAnswer = answer;
 
-    const {repeated, timesRepeated} = item.wordStatus;
+    const { repeated, timesRepeated } = item.wordStatus;
     if (polish === testAnswer) {
-      setCardTest(card => {
+      setCardTest((card) => {
         return {
           ...card,
-          wordStatus: { 
-            needMemorizing: false,
+          wordStatus: {
+            needMemorizing: null,
             memorize: false,
             repeated: repeated,
-            timesRepeated: timesRepeated
-          }
-        }
-      })
+            timesRepeated: timesRepeated,
+          },
+        };
+      });
     } else {
-      setCardTest(card => {
+      setCardTest((card) => {
         return {
           ...card,
-          wordStatus: { 
+          wordStatus: {
             ...wordStatus,
-            needMemorizing: true,
+            needMemorizing: false,
             repeated: true,
-            timesRepeated: timesRepeated + 1
-          }
-        }
-      })
-    } 
+            timesRepeated: timesRepeated + 1,
+          },
+        };
+      });
+    }
     setDoTest(false);
   };
 
   useEffect(() => {
-    testResult && updateData(cardTest); 
-  })
- 
+    testResult && updateData(cardTest);
+  });
 
   return (
     <div>
@@ -63,7 +68,7 @@ const Test = ({ allCards }) => {
           <tr>
             <TableHeading items={["#", "English", "Polish", "Submit"]} />
           </tr>
-          {allCards.map((card, index) => {
+          {testList.map((card, index) => {
             return (
               <tr key={card._id}>
                 <TableList

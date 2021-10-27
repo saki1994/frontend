@@ -4,7 +4,7 @@ const formData = {
     polish: "",
     english: "",
     wordStatus: {
-      needMemorizing: true,
+      needMemorizing: false,
       memorize: true,
       repeated: false,
       timesRepeated: 0,

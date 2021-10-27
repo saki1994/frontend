@@ -1,0 +1,21 @@
+@import "variables";
+@import "~bootstrap/scss/bootstrap"; 
+
+body {
+  background-color: #9d84b7;
+}
+.container {  
+  & > * {
+    font-family: $font-family; 
+  width: 70%;
+  height: 300px;   
+    margin: auto;  padding: 3% 5%; 
+
+    .nav-btn {
+        color: red;
+        padding: 5%;
+        text-align: center;
+        font-family: $font-family;
+    } 
+  }
+}

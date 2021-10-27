@@ -11,7 +11,7 @@ const Form = ({ dataLength }) => {
     setNewInput((previous) => {
       return {
         ...previous,
-        [name]: value,
+        [name]: value.toLowerCase(),
       };
     });
     e.preventDefault();
