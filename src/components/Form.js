@@ -7,6 +7,7 @@ import DailyCardList from "./DailyCardList";
 const Form = ({ dataLength, todayCards }) => {
   const [newInput, setNewInput] = useState(formData);
   const [showNewInput, setShowNewInput] = useState(false);
+  const [allNewInput, setAllNewInput] = useState([]);
 
   //handle and save changes
   const handleChange = (e) => {
@@ -24,6 +25,7 @@ const Form = ({ dataLength, todayCards }) => {
   const submitInput = (e) => {
     setShowNewInput(true);
     sendNewCard(newInput);
+    setAllNewInput((prev) => [...prev, newInput]);
     e.preventDefault();
   };
 
@@ -54,7 +56,7 @@ const Form = ({ dataLength, todayCards }) => {
       )}
       <DailyCardList
         todayCards={todayCards}
-        newItem={newInput}
+        newItem={allNewInput}
         showNewInput={showNewInput}
       />
     </>

@@ -1,0 +1,73 @@
+.daily-list {
+  position: relative;
+  margin-top: 30px;
+  color: #091353;
+  table {
+    border: 1px solid black;
+    width: 80%;
+    margin: auto;
+
+    td,
+    th,
+    tr {
+      padding: 15px;
+      border: 1px solid #d5d5d5;
+
+      button {
+        border: none;
+        background-color: transparent;
+      }
+
+      td:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .test-box {
+    background: rgb(178, 249, 252);
+    background: linear-gradient(
+      325deg,
+      rgba(178, 249, 252, 1) 1%,
+      rgba(157, 132, 183, 1) 99%
+    );
+    position: relative;
+    top: -130px;
+    left: 95px;
+    width: 81%;
+    padding: 7%;
+
+    h5 {
+      font-weight: 700;
+      width: 60%;
+      margin: auto;
+    }
+    p {
+      width: 100%;
+      &::first-letter {
+        text-transform: capitalize;
+      }
+    }
+
+    .close-test-box {
+      color: #fff;
+      font-size: 40px;
+      position: absolute;
+      left: 740px;
+      top: 32px;
+    }
+
+    .submit-test {
+      color: #fff;
+      text-shadow: 1px 1px 2px #d5d5d5;
+      background: linear-gradient(to bottom right, #e66465 0%, #9198e5 100%);
+      width: 40%;
+      font-size: 15px;
+      padding: 1%;
+      letter-spacing: 1px;
+      border-radius: 20px;
+      align-self: center;
+      border-color: #9d84b7;
+    }
+  }
+}

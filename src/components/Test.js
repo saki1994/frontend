@@ -5,7 +5,7 @@ import Button from "./Button";
 import TestBox from "./TestBox";
 import updateData from "./axios/axiosUpdateData";
 import { useEffect } from "react/cjs/react.development";
-import { wordStatus } from "./variables/formData";
+import "./stylesheet/TestBox/testBox.scss";
 
 const Test = ({ allCards }) => {
   const [doTest, setDoTest] = useState(false);
@@ -35,13 +35,13 @@ const Test = ({ allCards }) => {
           }
         };
       });
-    } else {
+    } else if (polish !== testAnswer) {
       setCardTest((card) => {
         return {
           ...card,
           wordStatus: {
-            ...wordStatus,
             needMemorizing: false,
+            memorize: true,
             repeated: true,
             timesRepeated: timesRepeated + 1
           }
@@ -56,32 +56,38 @@ const Test = ({ allCards }) => {
   });
 
   return (
-    <div>
+    <div className="daily-list">
       <table>
         <thead>
           <tr>
-            <TableHeading items={["#", "English", "Polish", "Submit"]} />
+            <TableHeading items={["#", "English", "Polish", "Result"]} />
           </tr>
-          {allCards.map((card, index) => {
-            return (
-              <tr key={card._id}>
-                <TableList
-                  items={[
-                    index + 1,
-                    card.english,
-                    <Button
-                      btnClickEvent={startTest}
-                      item={card}
-                      text="Ready?"
-                    />
-                  ]}
-                />
-              </tr>
-            );
-          })}
+          {allCards.map((card, index) => (
+            <tr>
+              <TableList
+                key={card._id}
+                items={[
+                  index + 1,
+                  card.english,
+                  <Button
+                    btnClickEvent={startTest}
+                    item={card}
+                    text="Click to start test..."
+                  />
+                ]}
+              />
+            </tr>
+          ))}
         </thead>
       </table>
-      {doTest && <TestBox allCards={cardTest} getAnswer={getAnswer} />}
+      {doTest && (
+        <TestBox
+          allCards={cardTest}
+          getAnswer={getAnswer}
+          closeTestBox={startTest}
+          isBoxOpen={doTest}
+        />
+      )}
     </div>
   );
 };

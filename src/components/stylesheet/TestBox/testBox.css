@@ -1,0 +1,66 @@
+.daily-list {
+  position: relative;
+  margin-top: 30px;
+  color: #091353;
+}
+.daily-list table {
+  border: 1px solid black;
+  width: 80%;
+  margin: auto;
+}
+.daily-list table td,
+.daily-list table th,
+.daily-list table tr {
+  padding: 15px;
+  border: 1px solid #d5d5d5;
+}
+.daily-list table td button,
+.daily-list table th button,
+.daily-list table tr button {
+  border: none;
+  background-color: transparent;
+}
+.daily-list table td td:first-letter,
+.daily-list table th td:first-letter,
+.daily-list table tr td:first-letter {
+  text-transform: uppercase;
+}
+.daily-list .test-box {
+  background: #b2f9fc;
+  background: linear-gradient(325deg, #b2f9fc 1%, #9d84b7 99%);
+  position: relative;
+  top: -130px;
+  left: 95px;
+  width: 81%;
+  padding: 7%;
+}
+.daily-list .test-box h5 {
+  font-weight: 700;
+  width: 60%;
+  margin: auto;
+}
+.daily-list .test-box p {
+  width: 100%;
+}
+.daily-list .test-box p::first-letter {
+  text-transform: capitalize;
+}
+.daily-list .test-box .close-test-box {
+  color: #fff;
+  font-size: 40px;
+  position: absolute;
+  left: 740px;
+  top: 32px;
+}
+.daily-list .test-box .submit-test {
+  color: #fff;
+  text-shadow: 1px 1px 2px #d5d5d5;
+  background: linear-gradient(to bottom right, #e66465 0%, #9198e5 100%);
+  width: 40%;
+  font-size: 15px;
+  padding: 1%;
+  letter-spacing: 1px;
+  border-radius: 20px;
+  align-self: center;
+  border-color: #9d84b7;
+}/*# sourceMappingURL=testBox.css.map */

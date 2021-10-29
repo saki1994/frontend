@@ -35,8 +35,6 @@ const DailyCardList = ({ todayCards, newItem, showNewInput }) => {
       (item) => item.dateAdded === today
     );
     setTodayList(todayInputList);
-
-    showNewInput && setTodayList((pre) => [...pre, newItem]);
   }, [newItem, showNewInput, todayCards]);
 
   return (
@@ -52,6 +50,29 @@ const DailyCardList = ({ todayCards, newItem, showNewInput }) => {
                 <TableList
                   items={[
                     index + 1,
+                    item.english,
+                    item.polish,
+                    <Button
+                      text={<EditOutlinedIcon />}
+                      btnClickEvent={editItem}
+                      item={item}
+                    />,
+                    <Button
+                      text={<DeleteOutlineOutlinedIcon />}
+                      btnClickEvent={deleteItem}
+                      item={item}
+                    />
+                  ]}
+                />
+              </tr>
+            );
+          })}
+          {newItem.map((item, index) => {
+            return (
+              <tr key={item._id}>
+                <TableList
+                  items={[
+                    todayList.length + index + 1,
                     item.english,
                     item.polish,
                     <Button
