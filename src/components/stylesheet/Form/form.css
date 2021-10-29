@@ -17,6 +17,7 @@ form input {
   outline: none;
   border-bottom: 1px solid #091353;
   background: transparent;
+  text-align: center;
 }
 form input::-moz-placeholder {
   color: #d5d5d5;

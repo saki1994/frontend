@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import updateData from "./axios/axiosUpdateData";
 import Carousel from "react-bootstrap/Carousel";
-import "./stylesheet/memorizeBox.scss";
+import "./stylesheet/MemorizeBox/memorizeBox.scss";
 
 const MemorizeBox = ({ allCards }) => {
   const [memorizeCards, setMemorizeCards] = useState([]);
@@ -45,11 +45,7 @@ const MemorizeBox = ({ allCards }) => {
             <div key={card._id} className="memo-box">
               <p>{card.polish}</p>
               <p>{card.english}</p>
-              <Button
-                btnClickEvent={memorizeBtn}
-                item={card}
-                text="Memorized"
-              />
+              <Button btnClickEvent={memorizeBtn} item={card} text="Remember" />
             </div>
           </Carousel.Item>
         );

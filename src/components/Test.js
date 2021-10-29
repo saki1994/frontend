@@ -13,7 +13,7 @@ const Test = ({ allCards }) => {
   const [testResult, setTestResult] = useState(false);
 
   const startTest = (item) => {
-    setDoTest(true);
+    doTest ? setDoTest(false) : setDoTest(true);
     setCardTest(item);
   };
 

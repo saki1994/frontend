@@ -16,6 +16,10 @@
         border: none;
         background-color: transparent;
       }
+
+      td:first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 
@@ -35,28 +39,6 @@
       color: #091353;
       left: 540px;
       font-size: 35px;
-    }
-
-    form {
-      padding: 7% 4% 5% 4%;
-      box-shadow: 1px 1px 6px #ededed, -7px -7px 0px #ffffff;
-    }
-
-    input {
-      align-self: center;
-      width: 80%;
-      border: none;
-      outline: none;
-      border-bottom: 1px solid #091353;
-      background: transparent;
-      text-align: center;
-
-      &::placeholder {
-        color: #d5d5d5;
-        font-size: 16px;
-        font-style: oblique;
-        text-align: center;
-      }
     }
 
     .submit {

@@ -1,5 +1,11 @@
 # TO DO - styling
 
-1. Memorize card
+1. Test Card
 
-- render check icon when memorize btn is clicked.
+- style test card
+
+2. Remaining to do
+
+- Memorize btn change text when click
+- Form new card input animation for rendering
+- daily list (td) animation when rendering

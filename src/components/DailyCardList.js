@@ -5,12 +5,12 @@ import deleteData from "./axios/axiosDeleteData";
 import { today } from "./date";
 import TableHeading from "./TableHeading";
 import TableList from "./TableList";
-import "./stylesheet/dailyCardList.scss";
+import "./stylesheet/DailyCardList/dailyCardList.scss";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 
-const DailyCardList = ({ todayCards }) => {
+const DailyCardList = ({ todayCards, newItem, showNewInput }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updateItem, setUpdateItem] = useState();
   const [todayList, setTodayList] = useState([]);
@@ -21,7 +21,7 @@ const DailyCardList = ({ todayCards }) => {
 
   //Edit an item
   const editItem = (item) => {
-    setIsEditing(true);
+    isEditing ? setIsEditing(false) : setIsEditing(true);
     setUpdateItem(item);
   };
 
@@ -35,7 +35,9 @@ const DailyCardList = ({ todayCards }) => {
       (item) => item.dateAdded === today
     );
     setTodayList(todayInputList);
-  }, [todayCards]);
+
+    showNewInput && setTodayList((pre) => [...pre, newItem]);
+  }, [newItem, showNewInput, todayCards]);
 
   return (
     <div className="daily-list">

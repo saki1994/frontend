@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import getAllData from "./axios/axiosGetData";
-import DailyCardList from "./DailyCardList";
 import Form from "./Form";
 import MemorizeBox from "./MemorizeBox";
 import Test from "./Test";
 import Carousel from "react-bootstrap/Carousel";
-import "./stylesheet/home.scss";
+import "./stylesheet/Home/home.scss";
 
 const Home = () => {
   const [getData, setGetData] = useState();
@@ -95,8 +94,7 @@ const Home = () => {
           <button className="close-btn" value="form" onClick={closeBox}>
             Close
           </button>
-          <Form dataLength={9} />
-          <DailyCardList todayCards={getData} />
+          <Form dataLength={9} todayCards={getData} />
         </div>
       )}
       {memorizeDiv && !showForm && (
