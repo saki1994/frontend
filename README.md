@@ -1,7 +1,5 @@
 # TO DO - styling
 
-1. Form Card
+1. Memorize card
 
-- daily list
-- delete
-- edit box
+- render check icon when memorize btn is clicked.
