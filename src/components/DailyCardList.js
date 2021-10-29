@@ -5,6 +5,10 @@ import deleteData from "./axios/axiosDeleteData";
 import { today } from "./date";
 import TableHeading from "./TableHeading";
 import TableList from "./TableList";
+import "./stylesheet/dailyCardList.scss";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 
 const DailyCardList = ({ todayCards }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -34,14 +38,11 @@ const DailyCardList = ({ todayCards }) => {
   }, [todayCards]);
 
   return (
-    <div>
-      <p>You have {todayList.length} cards added.</p>
+    <div className="daily-list">
       <table>
         <thead>
           <tr>
-            <TableHeading
-              items={["#", "English", "Polish", "Edit", "Delete"]}
-            />
+            <TableHeading items={["#", "English", "Polish"]} />
           </tr>
           {todayList.map((item, index) => {
             return (
@@ -51,12 +52,16 @@ const DailyCardList = ({ todayCards }) => {
                     index + 1,
                     item.english,
                     item.polish,
-                    <Button text="Edit" btnClickEvent={editItem} item={item} />,
                     <Button
-                      text="Delete"
-                      btnClickEvent={deleteItem}
+                      text={<EditOutlinedIcon />}
+                      btnClickEvent={editItem}
                       item={item}
                     />,
+                    <Button
+                      text={<DeleteOutlineOutlinedIcon />}
+                      btnClickEvent={deleteItem}
+                      item={item}
+                    />
                   ]}
                 />
               </tr>
@@ -65,11 +70,9 @@ const DailyCardList = ({ todayCards }) => {
         </thead>
       </table>
       {isEditing && (
-        <div>
+        <div className="edit-box">
+          <CloseIcon className="close-icon" onClick={closeEditBox} />
           <UpdateItem item={updateItem} />
-          <button type="submit" onClick={closeEditBox}>
-            Done
-          </button>
         </div>
       )}
     </div>

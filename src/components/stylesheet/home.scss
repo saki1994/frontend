@@ -1,0 +1,163 @@
+.container {
+  width: 100%;
+
+  .div {
+    width: 60%;
+    height: 300px;
+    margin: auto;
+    padding: 3% 5%;
+
+    .nav-btn {
+      padding: 5%;
+      height: 250px;
+      text-align: center;
+
+      p {
+        padding-top: 30px;
+        font-style: italic;
+        font-weight: 100;
+      }
+      button {
+        border: none;
+        font-size: 1.56rem;
+        font-weight: 700;
+        background: #e66465;
+        background: -webkit-linear-gradient(
+          to bottom right,
+          #e66465 0%,
+          #9198e5 100%
+        );
+        background: -moz-linear-gradient(
+          to bottom right,
+          #e66465 0%,
+          #9198e5 100%
+        );
+        background: linear-gradient(to bottom right, #e66465 0%, #9198e5 100%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-animation: tracking-in-expand-fwd-top 0.8s
+          cubic-bezier(0.215, 0.61, 0.355, 1) both;
+        animation: tracking-in-expand-fwd-top 0.8s
+          cubic-bezier(0.215, 0.61, 0.355, 1) both;
+
+        @-webkit-keyframes tracking-in-expand-fwd-top {
+          0% {
+            letter-spacing: -0.5em;
+            -webkit-transform: translateZ(-700px) translateY(-500px);
+            transform: translateZ(-700px) translateY(-500px);
+            opacity: 0;
+          }
+          40% {
+            opacity: 0.6;
+          }
+          100% {
+            -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+            opacity: 1;
+          }
+        }
+        @keyframes tracking-in-expand-fwd-top {
+          0% {
+            letter-spacing: -0.5em;
+            -webkit-transform: translateZ(-700px) translateY(-500px);
+            transform: translateZ(-700px) translateY(-500px);
+            opacity: 0;
+          }
+          40% {
+            opacity: 0.6;
+          }
+          100% {
+            -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+  .lower-div {
+    margin-top: 5rem;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(251, 249, 249, 0.2);
+    box-shadow: 0 1px 3px 0 rgb(31 38 135 / 37%);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 10px;
+
+    .close-btn {
+      border: none;
+      background: transparent;
+      background: #e66465;
+      background: -webkit-linear-gradient(
+        to bottom right,
+        #e66465 0%,
+        #9198e5 100%
+      );
+      background: -moz-linear-gradient(
+        to bottom right,
+        #e66465 0%,
+        #9198e5 100%
+      );
+      background: linear-gradient(to bottom right, #e66465 0%, #9198e5 100%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      &:first-child {
+        font-size: 20px;
+        font-weight: 600;
+        align-self: end;
+      }
+    }
+  }
+
+  .lower-div {
+    -webkit-animation: swing-in-top-fwd 1s
+      cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    animation: swing-in-top-fwd 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+
+    @-webkit-keyframes swing-in-top-fwd {
+      0% {
+        -webkit-transform: rotateX(-100deg);
+        transform: rotateX(-100deg);
+        -webkit-transform-origin: top;
+        transform-origin: top;
+        opacity: 0;
+      }
+      100% {
+        -webkit-transform: rotateX(0deg);
+        transform: rotateX(0deg);
+        -webkit-transform-origin: top;
+        transform-origin: top;
+        opacity: 1;
+      }
+    }
+    @keyframes swing-in-top-fwd {
+      0% {
+        -webkit-transform: rotateX(-100deg);
+        transform: rotateX(-100deg);
+        -webkit-transform-origin: top;
+        transform-origin: top;
+        opacity: 0;
+      }
+      100% {
+        -webkit-transform: rotateX(0deg);
+        transform: rotateX(0deg);
+        -webkit-transform-origin: top;
+        transform-origin: top;
+        opacity: 1;
+      }
+    }
+  }
+
+  .memorize-div {
+    background: rgb(178, 249, 252);
+    background: linear-gradient(
+      325deg,
+      rgba(178, 249, 252, 1) 1%,
+      rgba(157, 132, 183, 1) 99%
+    );
+  }
+}

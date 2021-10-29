@@ -4,15 +4,15 @@ import DailyCardList from "./DailyCardList";
 import Form from "./Form";
 import MemorizeBox from "./MemorizeBox";
 import Test from "./Test";
-import "./styleSheets/home.scss";
 import Carousel from "react-bootstrap/Carousel";
+import "./stylesheet/home.scss";
 
 const Home = () => {
   const [getData, setGetData] = useState();
   const [showForm, setShowForm] = useState(false);
   const [memorizeDiv, setMemorizeDiv] = useState(false);
   const [testDiv, setTestDiv] = useState(false);
-  const [allTrueCard, setAllTrueCard] = useState();
+  const [cardData, setCardData] = useState();
 
   useEffect(() => {
     getAllData(setGetData);
@@ -20,14 +20,15 @@ const Home = () => {
 
   const openBox = (e) => {
     const val = e.target.value;
-
     if (val === "form") {
       setOpenDiv(true, false, false);
     } else if (val === "memorize") {
       const getAllTrue = getData.filter((card) => card.wordStatus.memorize);
-      setAllTrueCard(getAllTrue);
+      setCardData(getAllTrue);
       setOpenDiv(false, true, false);
     } else if (val === "test") {
+      const test = getData.filter((card) => card.wordStatus.needMemorizing);
+      setCardData(test);
       setOpenDiv(false, false, true);
     }
   };
@@ -51,14 +52,14 @@ const Home = () => {
   };
   return (
     <div className="container">
-      <Carousel  variant="dark" interval={null}>
+      <Carousel className="div" variant="dark" interval={null}>
         <Carousel.Item className="nav-btn">
-          <p>Enter a new Card</p>
+          <p>
+            Learn a new language and <br /> get a new soul.
+          </p>
+
           <button value="form" onClick={openBox}>
-            Open Form
-          </button>
-          <button value="form" onClick={closeBox}>
-            Close Form
+            Enter new card
           </button>
         </Carousel.Item>
         <Carousel.Item className="nav-btn">
@@ -66,15 +67,12 @@ const Home = () => {
             <p>Refresh to get all Cards</p>
           ) : (
             <p>
-              Those who know nothing of foreign languages know nothing of their
-              own.
+              Those who know nothing of foreign
+              <br /> languages know nothing of their own.
             </p>
           )}
           <button value="memorize" onClick={openBox}>
-            Open Memorize
-          </button>
-          <button value="memorize" onClick={closeBox}>
-            Done Memorize
+            Start Memorize
           </button>
         </Carousel.Item>
         <Carousel.Item className="nav-btn">
@@ -82,28 +80,42 @@ const Home = () => {
             <p>Refresh to start the test.</p>
           ) : (
             <p>
-              Our greatest weakness lies in giving up. <br />
-              The most certain way to succeed is always to try just one more
-              time.
+              The most certain way to succeed is always <br />
+              to try just one more time.
             </p>
           )}
           <button value="test" onClick={openBox}>
-            Open Test
-          </button>
-          <button value="test" onClick={closeBox}>
-            Done Test
+            Click to start test
           </button>
         </Carousel.Item>
       </Carousel>
 
       {showForm && (
-        <div>
+        <div className="lower-div ">
+          <button className="close-btn" value="form" onClick={closeBox}>
+            Close
+          </button>
           <Form dataLength={9} />
           <DailyCardList todayCards={getData} />
         </div>
       )}
-      {memorizeDiv && !showForm && <MemorizeBox allCards={getData} />}
-      {testDiv && <Test allCards={allTrueCard} />}
+      {memorizeDiv && !showForm && (
+        <div className="lower-div memorize-div">
+          <button className="close-btn" value="memorize" onClick={closeBox}>
+            Close
+          </button>
+          <MemorizeBox allCards={cardData} />
+        </div>
+      )}
+
+      {testDiv && (
+        <div className="lower-div">
+          <button className="close-btn" value="test" onClick={closeBox}>
+            Close
+          </button>
+          <Test allCards={cardData} />
+        </div>
+      )}
     </div>
   );
 };

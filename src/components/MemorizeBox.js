@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
-import updateData from "./axios/axiosUpdateData"; 
+import updateData from "./axios/axiosUpdateData";
+import Carousel from "react-bootstrap/Carousel";
+import "./stylesheet/memorizeBox.scss";
 
 const MemorizeBox = ({ allCards }) => {
   const [memorizeCards, setMemorizeCards] = useState([]);
@@ -23,29 +25,36 @@ const MemorizeBox = ({ allCards }) => {
         ...lists,
         wordStatus: {
           ...lists.wordStatus,
-          needMemorizing: true,
-        },
+          needMemorizing: true
+        }
       };
     });
   };
 
-  const send = () => {
-    updateData(changeStatus);
-  };
+  useEffect(() => {
+    if (changeStatus) {
+      updateData(changeStatus);
+    }
+  }, [changeStatus]);
 
   return (
-    <div>
+    <Carousel fade interval={null}>
       {memorizeCards.map((card) => {
         return (
-          <div key={card._id}>
-            <p>{card.polish}</p>
-            <p>{card.english}</p>
-            <Button btnClickEvent={memorizeBtn} item={card} text="Memorized" />
-            <button onClick={send}>send</button>
-          </div>
+          <Carousel.Item>
+            <div key={card._id} className="memo-box">
+              <p>{card.polish}</p>
+              <p>{card.english}</p>
+              <Button
+                btnClickEvent={memorizeBtn}
+                item={card}
+                text="Memorized"
+              />
+            </div>
+          </Carousel.Item>
         );
       })}
-    </div>
+    </Carousel>
   );
 };
 

@@ -11,12 +11,6 @@ const Test = ({ allCards }) => {
   const [doTest, setDoTest] = useState(false);
   const [cardTest, setCardTest] = useState({});
   const [testResult, setTestResult] = useState(false);
-  const [testList, setTestList] = useState([]);
-
-  useEffect(() => {
-    const testCards = allCards.filter((card) => card.wordStatus.needMemorizing);
-    setTestList(testCards);
-  }, [allCards]);
 
   const startTest = (item) => {
     setDoTest(true);
@@ -37,8 +31,8 @@ const Test = ({ allCards }) => {
             needMemorizing: null,
             memorize: false,
             repeated: repeated,
-            timesRepeated: timesRepeated,
-          },
+            timesRepeated: timesRepeated
+          }
         };
       });
     } else {
@@ -49,8 +43,8 @@ const Test = ({ allCards }) => {
             ...wordStatus,
             needMemorizing: false,
             repeated: true,
-            timesRepeated: timesRepeated + 1,
-          },
+            timesRepeated: timesRepeated + 1
+          }
         };
       });
     }
@@ -68,7 +62,7 @@ const Test = ({ allCards }) => {
           <tr>
             <TableHeading items={["#", "English", "Polish", "Submit"]} />
           </tr>
-          {testList.map((card, index) => {
+          {allCards.map((card, index) => {
             return (
               <tr key={card._id}>
                 <TableList
@@ -79,7 +73,7 @@ const Test = ({ allCards }) => {
                       btnClickEvent={startTest}
                       item={card}
                       text="Ready?"
-                    />,
+                    />
                   ]}
                 />
               </tr>

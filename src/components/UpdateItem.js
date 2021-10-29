@@ -11,7 +11,7 @@ const UpdateItem = ({ item }) => {
     setCurrentItem((previous) => {
       return {
         ...previous,
-        [name]: value,
+        [name]: value
       };
     });
 
@@ -27,14 +27,14 @@ const UpdateItem = ({ item }) => {
 
   return (
     <form action="#">
-      <textarea
+      <input
         onChange={handleUpdate}
         type="text"
         name="polish"
         placeholder="Enter Polish word"
         value={currentItem.polish}
       />
-      <textarea
+      <input
         onChange={handleUpdate}
         type="text"
         name="english"
@@ -42,7 +42,7 @@ const UpdateItem = ({ item }) => {
         value={currentItem.english}
       />
 
-      <button type="submit" onClick={submitEdit}>
+      <button className="submit" type="submit" onClick={submitEdit}>
         Submit
       </button>
     </form>
