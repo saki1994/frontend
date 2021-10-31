@@ -35,7 +35,6 @@ const DailyCardList = ({ todayCards, newItem, showNewInput }) => {
       (item) => item.dateAdded === today
     );
     setTodayList(todayInputList);
-
     showNewInput && setTodayList((pre) => [...pre, newItem]);
   }, [newItem, showNewInput, todayCards]);
 

@@ -1,87 +1,25 @@
-import React, { useState } from "react";
-import TableHeading from "./TableHeading";
-import TableList from "./TableList";
-import Button from "./Button";
+import React from "react";
 import TestBox from "./TestBox";
 import updateData from "./axios/axiosUpdateData";
-import { useEffect } from "react/cjs/react.development";
-import { wordStatus } from "./variables/formData";
+import "./stylesheet/Test/test.scss";
 
 const Test = ({ allCards }) => {
-  const [doTest, setDoTest] = useState(false);
-  const [cardTest, setCardTest] = useState({});
-  const [testResult, setTestResult] = useState(false);
-
-  const startTest = (item) => {
-    doTest ? setDoTest(false) : setDoTest(true);
-    setCardTest(item);
+  const saveAnswer = (answer) => {
+    updateData(answer);
   };
-
-  const getAnswer = (item, answer) => {
-    setTestResult(true);
-    const polish = item.polish.toLowerCase();
-    const testAnswer = answer;
-
-    const { repeated, timesRepeated } = item.wordStatus;
-    if (polish === testAnswer) {
-      setCardTest((card) => {
-        return {
-          ...card,
-          wordStatus: {
-            needMemorizing: null,
-            memorize: false,
-            repeated: repeated,
-            timesRepeated: timesRepeated
-          }
-        };
-      });
-    } else {
-      setCardTest((card) => {
-        return {
-          ...card,
-          wordStatus: {
-            ...wordStatus,
-            needMemorizing: false,
-            repeated: true,
-            timesRepeated: timesRepeated + 1
-          }
-        };
-      });
-    }
-    setDoTest(false);
-  };
-
-  useEffect(() => {
-    testResult && updateData(cardTest);
-  });
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <TableHeading items={["#", "English", "Polish", "Submit"]} />
-          </tr>
-          {allCards.map((card, index) => {
-            return (
-              <tr key={card._id}>
-                <TableList
-                  items={[
-                    index + 1,
-                    card.english,
-                    <Button
-                      btnClickEvent={startTest}
-                      item={card}
-                      text="Ready?"
-                    />
-                  ]}
-                />
-              </tr>
-            );
-          })}
-        </thead>
-      </table>
-      {doTest && <TestBox allCards={cardTest} getAnswer={getAnswer} />}
+    <div className="text-container">
+      {allCards.map((card, index) => {
+        return (
+          <TestBox
+            key={card._id}
+            card={card}
+            index={index}
+            saveAnswer={saveAnswer}
+          />
+        );
+      })}
     </div>
   );
 };

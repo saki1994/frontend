@@ -1,0 +1,99 @@
+.text-container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 40% 40%;
+  gap: 30px;
+
+  div {
+    text-align: center;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    // glassmorphism
+    background: #fff;
+    box-shadow: 0px 2px 4px 1px #d5d5d5;
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+    border-radius: 10px;
+
+    //animation set up
+    -webkit-animation: puff-in-center 1s cubic-bezier(0.47, 0, 0.745, 0.715)
+      both;
+    animation: puff-in-center 1s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+
+    //animation
+    @-webkit-keyframes puff-in-center {
+      0% {
+        -webkit-transform: scale(2);
+        transform: scale(2);
+        -webkit-filter: blur(4px);
+        filter: blur(4px);
+        opacity: 0;
+      }
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+        opacity: 1;
+      }
+    }
+    @keyframes puff-in-center {
+      0% {
+        -webkit-transform: scale(2);
+        transform: scale(2);
+        -webkit-filter: blur(4px);
+        filter: blur(4px);
+        opacity: 0;
+      }
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+        opacity: 1;
+      }
+    }
+
+    h6 {
+      font-weight: 700;
+      &::first-letter {
+        text-transform: capitalize;
+      }
+    }
+
+    p {
+      span {
+        font-weight: 700;
+      }
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid #d5d5d5;
+      width: 80%;
+      align-self: center;
+      outline: none;
+      text-align: center;
+    }
+
+    button {
+      color: #fff;
+      text-shadow: 1px 1px 2px #d5d5d5;
+      background: linear-gradient(to bottom right, #e66465 0%, #9198e5 100%);
+      width: 40%;
+      font-size: 15px;
+      padding: 1%;
+      letter-spacing: 1px;
+      border-radius: 20px;
+      align-self: center;
+      border-color: #9d84b7;
+    }
+  }
+}
