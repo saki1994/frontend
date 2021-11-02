@@ -19,7 +19,7 @@ const TestBox = ({ card, saveAnswer }) => {
     const { polish } = item;
     const { repeated, timesRepeated } = item.wordStatus;
 
-    if (polish === answerInput) {
+    if (polish.toLowerCase() === answerInput.toLowerCase()) {
       setResult("Correct");
       setCardTest((card) => {
         return {
