@@ -5,6 +5,7 @@ import MemorizeBox from "./MemorizeBox";
 import Test from "./Test";
 import Carousel from "react-bootstrap/Carousel";
 import "./stylesheet/Home/home.scss";
+import { today } from "./date.js";
 
 const Home = () => {
   const [getData, setGetData] = useState();
@@ -26,7 +27,9 @@ const Home = () => {
       setCardData(getAllTrue);
       setOpenDiv(false, true, false);
     } else if (val === "test") {
-      const test = getData.filter((card) => card.wordStatus.needMemorizing);
+      const test = getData.filter(
+        (card) => card.wordStatus.needMemorizing && card.dateAdded !== today
+      );
       setCardData(test);
       setOpenDiv(false, false, true);
     }

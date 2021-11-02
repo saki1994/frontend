@@ -1,7 +1,7 @@
 .text-container {
   display: grid;
   justify-content: center;
-  grid-template-columns: 40% 40%;
+  grid-template-columns: 50% 50%;
   gap: 30px;
 
   div {
@@ -87,9 +87,9 @@
       color: #fff;
       text-shadow: 1px 1px 2px #d5d5d5;
       background: linear-gradient(to bottom right, #e66465 0%, #9198e5 100%);
-      width: 40%;
+      width: 50%;
       font-size: 15px;
-      padding: 1%;
+      padding: 2%;
       letter-spacing: 1px;
       border-radius: 20px;
       align-self: center;

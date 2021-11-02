@@ -8,9 +8,8 @@ import TableList from "./TableList";
 import "./stylesheet/DailyCardList/dailyCardList.scss";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import CloseIcon from "@mui/icons-material/Close";
 
-const DailyCardList = ({ todayCards, newItem, showNewInput }) => {
+const DailyCardList = ({ todayCards, newItem, showNewInput, editBoxEvent }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updateItem, setUpdateItem] = useState();
   const [todayList, setTodayList] = useState([]);
@@ -22,12 +21,8 @@ const DailyCardList = ({ todayCards, newItem, showNewInput }) => {
   //Edit an item
   const editItem = (item) => {
     isEditing ? setIsEditing(false) : setIsEditing(true);
+    isEditing ? editBoxEvent(false) : editBoxEvent(true);
     setUpdateItem(item);
-  };
-
-  const closeEditBox = () => {
-    setIsEditing(false);
-    window.location.reload(false);
   };
 
   useEffect(() => {
@@ -40,6 +35,11 @@ const DailyCardList = ({ todayCards, newItem, showNewInput }) => {
 
   return (
     <div className="daily-list">
+      {isEditing && (
+        <div className="edit-box form-animation">
+          <UpdateItem item={updateItem} />
+        </div>
+      )}
       <table>
         <thead>
           <tr>
@@ -70,12 +70,6 @@ const DailyCardList = ({ todayCards, newItem, showNewInput }) => {
           })}
         </thead>
       </table>
-      {isEditing && (
-        <div className="edit-box">
-          <CloseIcon className="close-icon" onClick={closeEditBox} />
-          <UpdateItem item={updateItem} />
-        </div>
-      )}
     </div>
   );
 };
