@@ -54,6 +54,10 @@ body {
   body .container .div {
     width: 100%;
   }
+  body .container .div .nav-btn button {
+    font-size: 1.05rem;
+    width: 70%;
+  }
   body .container form {
     width: 100%;
   }

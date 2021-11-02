@@ -19,22 +19,15 @@
       }
       button {
         border: none;
-        font-size: 1.56rem;
+        padding: 8px;
+        width: 50%;
+        font-size: 1.15rem;
         font-weight: 700;
         background: #e66465;
-        background: -webkit-linear-gradient(
-          to bottom right,
-          #e66465 0%,
-          #9198e5 100%
-        );
-        background: -moz-linear-gradient(
-          to bottom right,
-          #e66465 0%,
-          #9198e5 100%
-        );
         background: linear-gradient(to bottom right, #e66465 0%, #9198e5 100%);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: white;
+        border-radius: 20px;
+
         -webkit-animation: tracking-in-expand-fwd-top 0.8s
           cubic-bezier(0.215, 0.61, 0.355, 1) both;
         animation: tracking-in-expand-fwd-top 0.8s
@@ -89,26 +82,15 @@
 
     .close-btn {
       border: none;
-      background: transparent;
-      background: #e66465;
-      background: -webkit-linear-gradient(
-        to bottom right,
-        #e66465 0%,
-        #9198e5 100%
-      );
-      background: -moz-linear-gradient(
-        to bottom right,
-        #e66465 0%,
-        #9198e5 100%
-      );
+      color: white;
+      border-radius: 20px;
       background: linear-gradient(to bottom right, #e66465 0%, #9198e5 100%);
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
 
       &:first-child {
-        font-size: 18px;
-        font-weight: 600;
+        font-size: 17px;
         align-self: end;
+        padding: 5px;
+        width: 80px;
       }
     }
   }

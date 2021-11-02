@@ -66,6 +66,13 @@ body {
     .container {
       .div {
         width: 100%;
+
+        .nav-btn {
+          button {
+            font-size: 1.05rem;
+            width: 70%;
+          }
+        }
       }
 
       form {
