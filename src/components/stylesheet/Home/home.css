@@ -71,6 +71,7 @@
   border-radius: 10px;
 }
 .container .lower-div .close-btn {
+  align-self: end;
   border: none;
   color: white;
   border-radius: 20px;

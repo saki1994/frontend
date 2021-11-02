@@ -78,4 +78,21 @@ body {
   body .container .text-container {
     grid-template-columns: 100%;
   }
+  body .container .daily-list table {
+    border: none;
+  }
+  body .container .daily-list table tr {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 10% 45% 45%;
+  }
+  body .container .daily-list table tr td:first-child {
+    grid-row: 1/3;
+  }
+  body .container .daily-list table tr td:nth-child(4) {
+    width: 100%;
+  }
+  body .container .daily-list table tr td:nth-child(5) {
+    width: 100%;
+  }
 }/*# sourceMappingURL=mainStyle.css.map */
