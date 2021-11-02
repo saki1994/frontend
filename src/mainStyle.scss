@@ -4,3 +4,95 @@ body {
   font-family: "Montserrat", sans-serif;
   overflow-x: hidden;
 }
+
+@media only screen and (max-width: 950px) {
+  body {
+    padding: 0;
+
+    .container {
+      max-width: 100%;
+      .div {
+        width: 80%;
+
+        .nav-btn {
+          padding: 10%;
+
+          p {
+            padding-top: 50px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .lower-div {
+      gap: 30px;
+      .close-btn {
+        font-size: 3rem;
+      }
+      form {
+        width: 80%;
+
+        input:first-child {
+          padding-top: 20px;
+        }
+      }
+
+      .daily-list {
+        table {
+          width: 100%;
+          font-size: 15px;
+        }
+
+        .edit-box {
+          width: 100%;
+        }
+      }
+
+      .memo-box {
+        width: 70%;
+        padding: 8%;
+
+        button {
+          width: 35%;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  body {
+    .container {
+      .div {
+        width: 100%;
+      }
+
+      form {
+        width: 100%;
+      }
+
+      .memorize-div {
+        padding: 5% 1%;
+
+        button {
+          margin-right: 15px;
+        }
+
+        .memo-box {
+          width: 90%;
+          gap: 15px;
+
+          button {
+            width: 50%;
+            margin-bottom: 15px;
+          }
+        }
+      }
+
+      .text-container {
+        grid-template-columns: 100%;
+      }
+    }
+  }
+}

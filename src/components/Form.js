@@ -4,10 +4,10 @@ import sendNewCard from "./axios/axiosSendData";
 import "./stylesheet/Form/form.scss";
 import DailyCardList from "./DailyCardList";
 
-const Form = ({ dataLength, todayCards }) => {
+const Form = ({ todayCards }) => {
   const [newInput, setNewInput] = useState(formData);
   const [showNewInput, setShowNewInput] = useState(false);
-  const [allNewInput, setAllNewInput] = useState([]);
+  const [isEditingOn, setIsEditingOn] = useState(false);
 
   //handle and save changes
   const handleChange = (e) => {
@@ -25,39 +25,43 @@ const Form = ({ dataLength, todayCards }) => {
   const submitInput = (e) => {
     setShowNewInput(true);
     sendNewCard(newInput);
-    setAllNewInput((prev) => [...prev, newInput]);
     e.preventDefault();
+  };
+
+  //hide form when editing is on
+  const handleEdit = (param) => {
+    isEditingOn ? setIsEditingOn(false) : setIsEditingOn(true);
   };
 
   return (
     <>
-      {dataLength <= 10 ? (
-        <form>
-          <input
-            onChange={handleChange}
-            type="text"
-            name="english"
-            value={newInput.english}
-            placeholder="Enter English word"
-          />
-          <input
-            onChange={handleChange}
-            type="text"
-            name="polish"
-            value={newInput.polish}
-            placeholder="Enter Polish word"
-          />
-          <button className="submit-btn" type="submit" onClick={submitInput}>
-            Submit
-          </button>
-        </form>
-      ) : (
-        <p>You have entered 10 cards today.</p>
-      )}
+      <form
+        style={{ display: isEditingOn && "none" }}
+        className="form-animation"
+      >
+        <input
+          onChange={handleChange}
+          type="text"
+          name="english"
+          value={newInput.english}
+          placeholder="Enter English word"
+        />
+        <input
+          onChange={handleChange}
+          type="text"
+          name="polish"
+          value={newInput.polish}
+          placeholder="Enter Polish word"
+        />
+        <button className="submit-btn" type="submit" onClick={submitInput}>
+          Submit
+        </button>
+      </form>
       <DailyCardList
         todayCards={todayCards}
-        newItem={allNewInput}
+        newItem={newInput}
         showNewInput={showNewInput}
+        editBoxEvent={handleEdit}
       />
     </>
   );

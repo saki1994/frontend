@@ -3,4 +3,75 @@ body {
   padding: 7%;
   font-family: "Montserrat", sans-serif;
   overflow-x: hidden;
+}
+
+@media only screen and (max-width: 950px) {
+  body {
+    padding: 0;
+  }
+  body .container {
+    max-width: 100%;
+  }
+  body .container .div {
+    width: 80%;
+  }
+  body .container .div .nav-btn {
+    padding: 10%;
+  }
+  body .container .div .nav-btn p {
+    padding-top: 50px;
+    font-size: 14px;
+  }
+  body .lower-div {
+    gap: 30px;
+  }
+  body .lower-div .close-btn {
+    font-size: 3rem;
+  }
+  body .lower-div form {
+    width: 80%;
+  }
+  body .lower-div form input:first-child {
+    padding-top: 20px;
+  }
+  body .lower-div .daily-list table {
+    width: 100%;
+    font-size: 15px;
+  }
+  body .lower-div .daily-list .edit-box {
+    width: 100%;
+  }
+  body .lower-div .memo-box {
+    width: 70%;
+    padding: 8%;
+  }
+  body .lower-div .memo-box button {
+    width: 35%;
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  body .container .div {
+    width: 100%;
+  }
+  body .container form {
+    width: 100%;
+  }
+  body .container .memorize-div {
+    padding: 5% 1%;
+  }
+  body .container .memorize-div button {
+    margin-right: 15px;
+  }
+  body .container .memorize-div .memo-box {
+    width: 90%;
+    gap: 15px;
+  }
+  body .container .memorize-div .memo-box button {
+    width: 50%;
+    margin-bottom: 15px;
+  }
+  body .container .text-container {
+    grid-template-columns: 100%;
+  }
 }/*# sourceMappingURL=mainStyle.css.map */

@@ -1,44 +1,105 @@
 import React, { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
+import Button from "./Button";
+import { useHistory } from "react-router-dom";
 
-const TestBox = ({ allCards, getAnswer, closeTestBox, isBoxOpen }) => {
-  const [card, setCard] = useState("");
-  const [resultIcon, setResultIcon] = useState();
+const TestBox = ({ card, saveAnswer }) => {
+  const [isAnswering, setIsAnswering] = useState(false);
+  const [showResult, setShowResut] = useState(false);
+  const [answerInput, setAnswerInput] = useState("");
+  const [result, setResult] = useState("");
+  const [cardTest, setCardTest] = useState();
+  const history = useHistory();
 
-  //handle update
-  const handleUpdate = (e) => {
-    setCard(e.target.value);
-    e.preventDefault();
+  const startTest = (item) => {
+    setIsAnswering(true);
+    setCardTest(item);
   };
 
-  const submit = (e) => {
-    if (card !== "") {
-      getAnswer(allCards, card);
+  const checkAnswer = (item) => {
+    const { polish } = item;
+    const { repeated, timesRepeated } = item.wordStatus;
+
+    if (polish === answerInput) {
+      setResult("Correct");
+      setCardTest((card) => {
+        return {
+          ...card,
+          wordStatus: {
+            needMemorizing: null,
+            memorize: false,
+            repeated: repeated,
+            timesRepeated: timesRepeated
+          }
+        };
+      });
     } else {
-      setCard("Please type in your answer...");
+      setResult("Wrong");
+      setCardTest((card) => {
+        return {
+          ...card,
+          wordStatus: {
+            needMemorizing: false,
+            memorize: true,
+            repeated: true,
+            timesRepeated: timesRepeated + 1
+          }
+        };
+      });
     }
 
-    e.preventDefault();
+    setShowResut(true);
+    history.push(`/`);
   };
 
-  const closeBox = () => {
-    closeTestBox(isBoxOpen);
+  const handleChange = (e) => {
+    setAnswerInput(e.target.value);
   };
-  return (
-    <form className="test-box">
-      <CloseIcon className="close-test-box" onClick={closeBox} />
-      <h5>Type the polish translation of the sentence below</h5>
-      <p>"{allCards.english}"</p>
-      <input
-        onChange={handleUpdate}
-        name="polish"
-        value={card}
-        placeholder="Enter Polish Word..."
-      />
-      <button className="submit-test" onClick={submit}>
-        Submit
-      </button>
-    </form>
+
+  const saveResult = () => {
+    saveAnswer(cardTest);
+  };
+  return !showResult ? (
+    <div className="test-div">
+      <h6>"{card.english}"</h6>
+      {!isAnswering ? (
+        <Button btnClickEvent={startTest} item={card} text="Start Test" />
+      ) : (
+        <>
+          <input onChange={handleChange} value={answerInput} />
+          <Button btnClickEvent={checkAnswer} item={card} text="Check Answer" />
+        </>
+      )}
+    </div>
+  ) : (
+    <div>
+      <p>Your answer is {result}</p>
+      {result === "Correct" ? (
+        <>
+          <p>
+            <span>English: </span>
+            {card.english}
+          </p>
+          <p>
+            <span>Polish: </span>
+            {card.polish}
+          </p>
+        </>
+      ) : (
+        <>
+          <p>
+            <span>Correct answer is: </span>
+            {card.polish}
+          </p>
+          {answerInput === "" ? (
+            <p>You didn't enter your answer</p>
+          ) : (
+            <p>Your answer is: {answerInput}</p>
+          )}
+        </>
+      )}
+
+      <button onClick={saveResult}>Save result</button>
+    </div>
   );
 };
 

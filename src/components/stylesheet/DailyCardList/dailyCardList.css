@@ -1,6 +1,9 @@
 .daily-list {
   position: relative;
   margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 .daily-list table {
   border: 1px solid black;
@@ -12,6 +15,14 @@
 .daily-list table tr {
   padding: 15px;
   border: 1px solid #d5d5d5;
+}
+.daily-list table td td:nth-child(4),
+.daily-list table td td:nth-child(5),
+.daily-list table th td:nth-child(4),
+.daily-list table th td:nth-child(5),
+.daily-list table tr td:nth-child(4),
+.daily-list table tr td:nth-child(5) {
+  width: 10%;
 }
 .daily-list table td button,
 .daily-list table th button,
@@ -25,12 +36,8 @@
   text-transform: uppercase;
 }
 .daily-list .edit-box {
-  position: absolute;
-  width: 100%;
-  top: -295px;
-  left: 202px;
-  -webkit-animation: puff-in-center 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) both;
-  animation: puff-in-center 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+  width: 90%;
+  margin: auto;
 }
 .daily-list .edit-box .close-icon {
   position: absolute;
@@ -38,6 +45,9 @@
   color: #091353;
   left: 540px;
   font-size: 35px;
+}
+.daily-list .edit-box form {
+  margin: auto;
 }
 .daily-list .edit-box .submit {
   color: #fff;
@@ -50,28 +60,4 @@
   border-radius: 20px;
   align-self: center;
   border-color: #9d84b7;
-}
-@-webkit-keyframes puff-in-center {
-  0% {
-    transform: scale(2);
-    filter: blur(4px);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    filter: blur(0px);
-    opacity: 1;
-  }
-}
-@keyframes puff-in-center {
-  0% {
-    transform: scale(2);
-    filter: blur(4px);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    filter: blur(0px);
-    opacity: 1;
-  }
 }/*# sourceMappingURL=dailyCardList.css.map */
