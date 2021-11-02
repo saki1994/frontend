@@ -61,7 +61,7 @@ const Home = () => {
           </p>
 
           <button value="form" onClick={openBox}>
-            Enter new card
+            <span>Enter new card</span>
           </button>
         </Carousel.Item>
         <Carousel.Item className="nav-btn">
@@ -74,7 +74,7 @@ const Home = () => {
             </p>
           )}
           <button value="memorize" onClick={openBox}>
-            Start Memorize
+            <span>Start Memorize</span>
           </button>
         </Carousel.Item>
         <Carousel.Item className="nav-btn">
@@ -87,7 +87,7 @@ const Home = () => {
             </p>
           )}
           <button value="test" onClick={openBox}>
-            Click to start test
+            <span>Click to start test</span>
           </button>
         </Carousel.Item>
       </Carousel>
