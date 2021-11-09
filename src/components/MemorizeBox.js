@@ -38,7 +38,7 @@ const MemorizeBox = ({ allCards }) => {
   }, [changeStatus]);
 
   return (
-    <Carousel fade interval={null}>
+    <Carousel interval={null}>
       {memorizeCards.map((card) => {
         return (
           <Carousel.Item>
